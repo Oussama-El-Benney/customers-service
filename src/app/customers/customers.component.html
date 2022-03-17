@@ -1,0 +1,44 @@
+
+<div class="flex items-center my-6">
+  <img class="object-left w-12 h-12 ml-16 mr-4" src="./assets/user.png" alt="user icon">
+  <span class="font-semibold text-xl tracking-tight text-3xl ml-8">Customers</span>
+</div>
+
+<div class="flex items-center my-10 justify-around">
+  <div class="flex items-center" >
+  <div class="flex items-center card-view ml-32">
+    <img class="object-left w-7 h-7 mr-4" src="./assets/cardview.png" alt="Customer Service">
+    <span class="font-semibold tracking-tight text-xl" >Card View</span>
+  </div>
+  <div class="flex items-center card-view ml-16">
+    <img class="object-left w-7 h-7 mr-4" src="./assets/listview.png" alt="Customer Service">
+    <span class="font-semibold tracking-tight text-xl" >List View</span>
+  </div>
+  <div class="flex items-center card-view ml-16">
+    <img class="object-left w-7 h-7 mr-4" src="./assets/mapview.png" alt="Customer Service">
+    <span class="font-semibold tracking-tight text-xl" >Map View</span>
+  </div>
+  <div
+      class="flex items-center card-view ml-16"
+      (click)="onAddNewCustomer()">
+    <img class="object-left w-7 h-7 mr-4" src="./assets/plusview.png" alt="Customer Service">
+    <span class="font-semibold tracking-tight text-xl" >New Customer</span>
+  </div>
+  </div>
+  <div class="flex  flex-col justify-end ">
+  <span class=" font-medium text-xl" >Filter :</span>
+  <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="filter" type="text" placeholder="filter words">
+  </div>
+</div>
+<router-outlet></router-outlet>
+
+<div class="flex w-full justify-center">
+  <div class="flex flex-wrap justify-center w-4/5 " >
+    <app-customer
+    *ngFor="let customerEl of customers, let i = index"
+    [customer]="customerEl"
+    [index]="i"
+  ></app-customer>
+  </div>
+
+</div>
