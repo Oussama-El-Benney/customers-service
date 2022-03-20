@@ -11,7 +11,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class CustomerComponent implements OnInit {
   // @ts-ignore
   @Input() customer: Customer;
-  @Input() index: any;
+  @Input() index: any ;
 
   constructor(private customerService: CustomersManagerService,
               private route: ActivatedRoute,
@@ -19,12 +19,14 @@ export class CustomerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("s")
+
   }
 
   onEditCustomer(index: number) {
-    this.router.navigate([this.index, 'edit'], {relativeTo: this.route})
-    this.customerService.editMode = true;
+
+    console.log( this.customerService.startedEditing)
+    this.router.navigate(['edit'], {relativeTo: this.route, queryParams: {id:index}})
     this.customerService.startedEditing.next(index)
+    // this.customerService.editMode = true;
   }
 }

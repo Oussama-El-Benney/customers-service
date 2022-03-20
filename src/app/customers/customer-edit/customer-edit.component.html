@@ -13,14 +13,14 @@
                type="text"
                placeholder="oussa"
                name="name"
-               #name="ngModel"
-               ngModel
+               [(ngModel)]="customerName"
                required
+
         >
-        <div [hidden]="name.valid || name.pristine"
-             class="text-red-500 text-xs italic ">
-          Name is required
-        </div>
+<!--        <div [hidden]="customerName.valid || customerName.pristine"-->
+<!--             class="text-red-500 text-xs italic ">-->
+<!--          Name is required-->
+<!--        </div>-->
         <p class="text-red-500 text-xs italic">Please fill out this field.</p>
       </div>
       <div class="w-full md:w-1/2 px-3">
@@ -48,8 +48,7 @@
           type="text"
           placeholder="ex:Maamoura"
           name="location"
-          #location="ngModel"
-          ngModel>
+          [(ngModel)]="customerLocation">
         <p class="text-gray-600 text-xs italic">Don't worry</p>
       </div>
     </div>
@@ -64,8 +63,7 @@
           type="text"
           placeholder="Male/Female"
           name="gender"
-          #gender="ngModel"
-          ngModel>
+          [(ngModel)]="customerGender">
       </div>
       <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
@@ -76,8 +74,7 @@
             class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-state"
             name="orders"
-            #orders="ngModel"
-            ngModel>
+            [(ngModel)]="customerOrders">
             <option>Nothing</option>
             <option>Potato</option>
             <option>Tomato</option>

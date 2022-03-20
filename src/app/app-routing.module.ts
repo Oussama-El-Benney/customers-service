@@ -8,9 +8,10 @@ import {OrdersComponent} from "./orders/orders.component";
 import {CustomerEditComponent} from "./customers/customer-edit/customer-edit.component";
 
 const routes: Routes = [
+
   { path: 'customers', component: CustomersComponent, children:[
       { path: 'new', component: CustomerEditComponent },
-      { path: ':id/edit', component: CustomerEditComponent },]},
+      { path: 'edit', component: CustomerEditComponent },]},
   { path: 'id', component: CustomerComponent },
   { path: 'about', component: AboutComponent },
   { path: 'orders', component: OrdersComponent },

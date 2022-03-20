@@ -45,7 +45,7 @@ export class CustomersManagerService {
     this.customersChanged.next(this.customers.slice());
   }
   updateCustomer(index : number, newCustomer: Customer) {
-    this.customers[index] = newCustomer;
+    this.customers.splice(index,1, newCustomer)
     console.log(this.customers)
     this.customersChanged.next(this.customers.slice());
   }

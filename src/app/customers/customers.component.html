@@ -1,39 +1,39 @@
 
 <div class="flex items-center my-6">
-  <img class="object-left w-12 h-12 ml-16 mr-4" src="./assets/user.png" alt="user icon">
-  <span class="font-semibold text-xl tracking-tight text-3xl ml-8">Customers</span>
+  <img class="object-left mr-4 ml-16 w-12 h-12" src="./assets/user.png" alt="user icon">
+  <span class="ml-8 text-xl text-3xl font-semibold tracking-tight">Customers</span>
 </div>
 
-<div class="flex items-center my-10 justify-around">
+<div class="flex justify-around items-center my-10">
   <div class="flex items-center" >
-  <div class="flex items-center card-view ml-32">
-    <img class="object-left w-7 h-7 mr-4" src="./assets/cardview.png" alt="Customer Service">
-    <span class="font-semibold tracking-tight text-xl" >Card View</span>
+  <div class="flex items-center ml-32 card-view">
+    <img class="object-left mr-4 w-7 h-7" src="./assets/cardview.png" alt="Customer Service">
+    <span class="text-xl font-semibold tracking-tight" >Card View</span>
   </div>
-  <div class="flex items-center card-view ml-16">
-    <img class="object-left w-7 h-7 mr-4" src="./assets/listview.png" alt="Customer Service">
-    <span class="font-semibold tracking-tight text-xl" >List View</span>
+  <div class="flex items-center ml-16 card-view">
+    <img class="object-left mr-4 w-7 h-7" src="./assets/listview.png" alt="Customer Service">
+    <span class="text-xl font-semibold tracking-tight" >List View</span>
   </div>
-  <div class="flex items-center card-view ml-16">
-    <img class="object-left w-7 h-7 mr-4" src="./assets/mapview.png" alt="Customer Service">
-    <span class="font-semibold tracking-tight text-xl" >Map View</span>
+  <div class="flex items-center ml-16 card-view">
+    <img class="object-left mr-4 w-7 h-7" src="./assets/mapview.png" alt="Customer Service">
+    <span class="text-xl font-semibold tracking-tight" >Map View</span>
   </div>
   <div
-      class="flex items-center card-view ml-16"
+      class="flex items-center ml-16 card-view"
       (click)="onAddNewCustomer()">
-    <img class="object-left w-7 h-7 mr-4" src="./assets/plusview.png" alt="Customer Service">
-    <span class="font-semibold tracking-tight text-xl" >New Customer</span>
+    <img class="object-left mr-4 w-7 h-7" src="./assets/plusview.png" alt="Customer Service">
+    <span class="text-xl font-semibold tracking-tight" >New Customer</span>
   </div>
   </div>
-  <div class="flex  flex-col justify-end ">
-  <span class=" font-medium text-xl" >Filter :</span>
-  <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="filter" type="text" placeholder="filter words">
+  <div class="flex flex-col justify-end">
+  <span class="text-xl font-medium" >Filter :</span>
+  <input class="px-3 py-2 w-full leading-tight text-gray-700 rounded border shadow appearance-none focus:outline-none focus:shadow-outline" id="filter" type="text" placeholder="filter words">
   </div>
 </div>
 <router-outlet></router-outlet>
 
-<div class="flex w-full justify-center">
-  <div class="flex flex-wrap justify-center w-4/5 " >
+<div class="flex justify-center w-full">
+  <div class="flex flex-wrap justify-center w-4/5" >
     <app-customer
     *ngFor="let customerEl of customers, let i = index"
     [customer]="customerEl"
@@ -42,3 +42,36 @@
   </div>
 
 </div>
+
+<div class="flex justify-center items-center px-4 py-10 lg:px-0 sm:px-6">
+  <div class="flex justify-between items-center w-full border-t border-gray-200 lg:w-3/5 dark:border-gray-700">
+    <div class="flex items-center pt-3 text-gray-600 cursor-pointer dark:text-gray-200 hover:text-teal-700">
+      <svg width="14" height="8" viewBox="0 0 14 8" fill="none" >
+        <path d="M1.1665 4H12.8332" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M1.1665 4L4.49984 7.33333" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M1.1665 4.00002L4.49984 0.666687" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <p class="ml-3 text-sm font-medium leading-none">Previous</p>
+    </div>
+    <div class="hidden sm:flex">
+      <p class="px-2 pt-3 mr-4 text-sm font-medium leading-none text-gray-600 border-t border-transparent cursor-pointer dark:text-gray-200 hover:text-teal-700 dark:hover:text-teal-400 hover:border-teal-400">1</p>
+      <p class="px-2 pt-3 mr-4 text-sm font-medium leading-none text-gray-600 border-t border-transparent cursor-pointer dark:text-gray-200 hover:text-teal-700 dark:hover:text-teal-400 hover:border-teal-400">2</p>
+      <p class="px-2 pt-3 mr-4 text-sm font-medium leading-none text-gray-600 border-t border-transparent cursor-pointer dark:text-gray-200 hover:text-teal-700 dark:hover:text-teal-400 hover:border-teal-400">3</p>
+      <p class="px-2 pt-3 mr-4 text-sm font-medium leading-none text-teal-700 border-t border-teal-400 cursor-pointer dark:text-teal-400">4</p>
+      <p class="px-2 pt-3 mr-4 text-sm font-medium leading-none text-gray-600 border-t border-transparent cursor-pointer dark:text-gray-200 hover:text-teal-700 dark:hover:text-teal-400 hover:border-teal-400">5</p>
+      <p class="px-2 pt-3 mr-4 text-sm font-medium leading-none text-gray-600 border-t border-transparent cursor-pointer dark:text-gray-200 hover:text-teal-700 dark:hover:text-teal-400 hover:border-teal-400">6</p>
+      <p class="px-2 pt-3 mr-4 text-sm font-medium leading-none text-gray-600 border-t border-transparent cursor-pointer dark:text-gray-200 hover:text-teal-700 dark:hover:text-teal-400 hover:border-teal-400">7</p>
+      <p class="px-2 pt-3 mr-4 text-sm font-medium leading-none text-gray-600 border-t border-transparent cursor-pointer dark:text-gray-200 hover:text-teal-700 dark:hover:text-teal-400 hover:border-teal-400">8</p>
+    </div>
+    <div class="flex items-center pt-3 text-gray-600 cursor-pointer dark:text-gray-200 hover:text-teal-700">
+      <p class="mr-3 text-sm font-medium leading-none">Next</p>
+      <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1.1665 4H12.8332" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9.5 7.33333L12.8333 4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9.5 0.666687L12.8333 4.00002" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+    </div>
+  </div>
+</div>
+

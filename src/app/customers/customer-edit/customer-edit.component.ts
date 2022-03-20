@@ -1,9 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {Customer} from "../../model/customer.model";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {CustomersManagerService} from "../customers-manager.service";
 import {Subscription} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-customer-edit',
@@ -12,7 +13,11 @@ import {Subscription} from "rxjs";
 })
 export class CustomerEditComponent implements OnInit {
   // @ts-ignore
-  @ViewChild('f', {static: false}) customerForm: NgForm;
+  // @ViewChild('f', {static: false}) customerForm: NgForm;
+  customerName = '';
+  customerLocation = '';
+  customerGender = '';
+  customerOrders = '';
   // @ts-ignore
   editMode: boolean;
   // @ts-ignore
@@ -24,33 +29,52 @@ export class CustomerEditComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private customerService: CustomersManagerService,
-              private router: Router) {
+              private router: Router,
+              private http: HttpClient) {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.editedCustomerIndex = +params['id'];
-      this.editMode = params['id'] != null;
-      this.customerService.startedEditing.next(+params['id'])
-    });
-    this.subscription = this.customerService.startedEditing.subscribe(() => {
-      this.editedCustomer = this.customerService.getCustomer(this.editedCustomerIndex);
-      this.customerForm.setValue(
-        {
-          name: this.editedCustomer.name,
-          gender: this.editedCustomer.gender,
-          location: this.editedCustomer.location,
-          orders: this.editedCustomer.orders,
+
+    // this.editedCustomerIndex = this.route.snapshot.queryParams['id']
+    // this.editMode = this.editedCustomerIndex != null;
+    // this.editedCustomer = this.customerService.getCustomer(this.editedCustomerIndex);
+    // this.customerName = this.editedCustomer.name;
+    // this.customerGender = this.editedCustomer.gender;
+    // this.customerLocation = this.editedCustomer.location;
+    // this.customerOrders = this.editedCustomer.orders;
+
+
+    this.route.queryParams
+      .subscribe(
+        (queryParams: Params) => {
+          this.editedCustomerIndex = this.route.snapshot.queryParams['id']
+          this.editMode = this.editedCustomerIndex != null;
+          this.editedCustomer = this.customerService.getCustomer(this.editedCustomerIndex);
+          this.customerName = this.editedCustomer.name;
+          this.customerGender = this.editedCustomer.gender;
+          this.customerLocation = this.editedCustomer.location;
+          this.customerOrders = this.editedCustomer.orders;
         }
-      )
-      console.log(this.customerService.editMode)
-      console.log(this.customerForm)
-    });
+      );
+
+    // this.subscription = this.customerService.startedEditing.subscribe(index => {
+    //   console.log(index)
+    //   this.editedCustomer = this.customerService.getCustomer(index);
+    //   this.customerForm.setValue(
+    //     {
+    //       name: this.editedCustomer.name,
+    //       gender: this.editedCustomer.gender,
+    //       location: this.editedCustomer.location,
+    //       orders: this.editedCustomer.orders,
+    //     }
+    //   )
+    //   console.log(this.customerService.editMode)
+    //   console.log(this.customerForm)
+    // });
   }
 
 
   onSubmit(customerForm: NgForm) {
-    console.log(customerForm.value)
     let newCustomer = new Customer(customerForm.value.name, customerForm.value.gender, customerForm.value.location, customerForm.value.orders)
     console.log(newCustomer)
     if (this.editMode) {
@@ -58,8 +82,15 @@ export class CustomerEditComponent implements OnInit {
     } else {
       this.customerService.addCustomer(newCustomer)
     }
+    this.http.post('https://customers-service-48899-default-rtdb.firebaseio.com/customers.json',
+      this.customerService.getCustomers()).subscribe(
+      responseData => {
+        console.log(responseData);
+      }
+    );
     this.editMode = false;
     this.onCancel();
+
   }
 
   onCancel() {
@@ -71,7 +102,7 @@ export class CustomerEditComponent implements OnInit {
     this.onCancel();
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
+  // ngOnDestroy() {
+  //   this.subscription.unsubscribe();
+  // }
 }

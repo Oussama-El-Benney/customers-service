@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Customer} from "../model/customer.model";
 import {CustomersManagerService} from "./customers-manager.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-customers',
@@ -10,15 +11,21 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class CustomersComponent implements OnInit {
   customers: Customer[] | undefined
-
+  // @ts-ignore
+  subscription: Subscription;
   constructor(private customerService: CustomersManagerService,
               private route: ActivatedRoute,
               private router: Router) {
   }
 
   ngOnInit(): void {
+
     this.customers = this.customerService.getCustomers();
     console.log(this.customers)
+    this.subscription = this.customerService.customersChanged.subscribe(()=> {
+      console.log("shesj")
+      this.customers = this.customerService.getCustomers();
+    });
   }
 
   onAddNewCustomer() {
