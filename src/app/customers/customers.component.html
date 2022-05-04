@@ -1,25 +1,32 @@
 
 <div class="flex items-center my-6">
   <img class="object-left mr-4 ml-16 w-12 h-12" src="./assets/user.png" alt="user icon">
-  <span class="ml-8 text-xl text-3xl font-semibold tracking-tight">Customers</span>
+  <span class="ml-8 text-xl text-3xl font-semibold tracking-tight" >Customers</span>
 </div>
 
 <div class="flex justify-around items-center my-10">
   <div class="flex items-center" >
-  <div class="flex items-center ml-32 card-view">
+  <div class="flex items-center ml-32 card-view cursor-pointer"(click)="viewMode =0"
+       routerLink="/customers">
     <img class="object-left mr-4 w-7 h-7" src="./assets/cardview.png" alt="Customer Service">
-    <span class="text-xl font-semibold tracking-tight" >Card View</span>
+    <span class="text-xl font-semibold tracking-tight"
+
+    >Card View</span>
   </div>
-  <div class="flex items-center ml-16 card-view">
+  <div class="flex items-center ml-16 card-view cursor-pointer"
+       routerLink="/customers"
+       (click)="viewMode =1">
     <img class="object-left mr-4 w-7 h-7" src="./assets/listview.png" alt="Customer Service">
     <span class="text-xl font-semibold tracking-tight" >List View</span>
   </div>
-  <div class="flex items-center ml-16 card-view">
+  <div class="flex items-center ml-16 card-view cursor-pointer	"
+       routerLink="/customers"
+       (click)="viewMode =2"  >
     <img class="object-left mr-4 w-7 h-7" src="./assets/mapview.png" alt="Customer Service">
     <span class="text-xl font-semibold tracking-tight" >Map View</span>
   </div>
   <div
-      class="flex items-center ml-16 card-view"
+      class="flex items-center ml-16 card-view cursor-pointer"
       (click)="onAddNewCustomer()">
     <img class="object-left mr-4 w-7 h-7" src="./assets/plusview.png" alt="Customer Service">
     <span class="text-xl font-semibold tracking-tight" >New Customer</span>
@@ -38,10 +45,12 @@
     *ngFor="let customerEl of customers, let i = index"
     [customer]="customerEl"
     [index]="i"
+    [viewMode]="viewMode"
   ></app-customer>
   </div>
 
 </div>
+
 
 <div class="flex justify-center items-center px-4 py-10 lg:px-0 sm:px-6">
   <div class="flex justify-between items-center w-full border-t border-gray-200 lg:w-3/5 dark:border-gray-700">

@@ -12,6 +12,8 @@ import { AboutComponent } from './about/about.component';
 import { CustomerEditComponent } from './customers/customer-edit/customer-edit.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import { AuthComponent } from './auth/auth.component';
+import { CustomerOrdersComponent } from './customers/customer-orders/customer-orders.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import {HttpClientModule} from "@angular/common/http";
     HeaderComponent,
     OrdersComponent,
     AboutComponent,
-    CustomerEditComponent
+    CustomerEditComponent,
+    AuthComponent,
+    CustomerOrdersComponent,
   ],
     imports: [
         BrowserModule,

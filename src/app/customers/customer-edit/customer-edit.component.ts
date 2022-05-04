@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {Customer} from "../../model/customer.model";
+import {Customer} from "../../shared/customer.model";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {CustomersManagerService} from "../customers-manager.service";
 import {Subscription} from "rxjs";
@@ -35,15 +35,6 @@ export class CustomerEditComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.editedCustomerIndex = this.route.snapshot.queryParams['id']
-    // this.editMode = this.editedCustomerIndex != null;
-    // this.editedCustomer = this.customerService.getCustomer(this.editedCustomerIndex);
-    // this.customerName = this.editedCustomer.name;
-    // this.customerGender = this.editedCustomer.gender;
-    // this.customerLocation = this.editedCustomer.location;
-    // this.customerOrders = this.editedCustomer.orders;
-
-
     this.route.queryParams
       .subscribe(
         (queryParams: Params) => {
@@ -57,20 +48,6 @@ export class CustomerEditComponent implements OnInit {
         }
       );
 
-    // this.subscription = this.customerService.startedEditing.subscribe(index => {
-    //   console.log(index)
-    //   this.editedCustomer = this.customerService.getCustomer(index);
-    //   this.customerForm.setValue(
-    //     {
-    //       name: this.editedCustomer.name,
-    //       gender: this.editedCustomer.gender,
-    //       location: this.editedCustomer.location,
-    //       orders: this.editedCustomer.orders,
-    //     }
-    //   )
-    //   console.log(this.customerService.editMode)
-    //   console.log(this.customerForm)
-    // });
   }
 
 
@@ -82,12 +59,14 @@ export class CustomerEditComponent implements OnInit {
     } else {
       this.customerService.addCustomer(newCustomer)
     }
-    this.http.post('https://customers-service-48899-default-rtdb.firebaseio.com/customers.json',
-      this.customerService.getCustomers()).subscribe(
-      responseData => {
-        console.log(responseData);
-      }
-    );
+    // this.http.put('https://customers-service-48899-default-rtdb.firebaseio.com/customers.json',
+    //   this.customerService.getCustomers()).subscribe(
+    //   responseData => {
+    //     console.log(responseData);
+    //   }
+    // );
+
+    this.customerService.storeCustomers();
     this.editMode = false;
     this.onCancel();
 

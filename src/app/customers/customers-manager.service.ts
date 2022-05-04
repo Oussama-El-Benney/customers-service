@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Customer} from "../model/customer.model";
-import {Subject} from "rxjs";
+import {Customer} from "../shared/customer.model";
+import {map, Subject, tap} from "rxjs";
+import {DataStorageService} from "../shared/data-storage.service";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +10,7 @@ import {Subject} from "rxjs";
 export class CustomersManagerService {
   customersChanged = new Subject<Customer[]>();
   startedEditing = new Subject<number>();
+
   // @ts-ignore
   editMode : boolean;
   private customers: Customer[] = [
@@ -23,9 +26,12 @@ export class CustomersManagerService {
     new Customer("sheeeeesh", "male", "saitama", "nothing"),
   ]
 
-  constructor() {
+  constructor(private http : HttpClient) {
   }
-
+  setCustomers(customers: Customer[]) {
+    this.customers = customers;
+    this.customersChanged.next(this.customers.slice());
+  }
   getCustomers() {
     return this.customers.slice();
   }
@@ -37,6 +43,7 @@ export class CustomersManagerService {
     this.customers.push(customer);
     console.log(this.customers)
     this.customersChanged.next(this.customers.slice());
+    // this.dataStorage.storeCustomers();
   }
   addCustomers(customers: Customer[]) {
     // @ts-ignore
@@ -49,9 +56,53 @@ export class CustomersManagerService {
     console.log(this.customers)
     this.customersChanged.next(this.customers.slice());
   }
+  // deleteCustomer(index : number) {
+  //   this.customers.splice(index,1);
+  //   console.log(this.customers)
+  //   this.customersChanged.next(this.customers.slice());
+  // }
+
+  storeCustomers() {
+    const customers = this.getCustomers();
+    this.http
+      .put(
+        'https://customers-service-48899-default-rtdb.firebaseio.com/customers.json',
+        customers
+      )
+      .subscribe(response => {
+        console.log(response);
+      });
+  }
+
+  fetchCustomers() {
+    return this.http
+      .get<Customer[]>(
+        'https://ng-course-recipe-book-65f10.firebaseio.com/recipes.json'
+      )
+      .pipe(
+        map(customers => {
+          return customers.map(customer => {
+            return {
+              ...customer,
+            };
+          });
+        }),
+        tap(customers => {
+          this.setCustomers(customers);
+        })
+      )
+  }
+
   deleteCustomer(index : number) {
     this.customers.splice(index,1);
     console.log(this.customers)
     this.customersChanged.next(this.customers.slice());
+    return this.http
+      .delete(
+        `https://customers-service-48899-default-rtdb.firebaseio.com/customers.json/${index}`
+      )
+      .subscribe(response => {
+        console.log(response);
+      });
   }
 }

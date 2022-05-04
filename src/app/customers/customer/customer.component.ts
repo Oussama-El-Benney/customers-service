@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Customer} from "../../model/customer.model";
+import {Customer} from "../../shared/customer.model";
 import {CustomersManagerService} from "../customers-manager.service";
 import {ActivatedRoute, Router} from "@angular/router";
 
@@ -12,6 +12,7 @@ export class CustomerComponent implements OnInit {
   // @ts-ignore
   @Input() customer: Customer;
   @Input() index: any ;
+  @Input() viewMode: any ;
 
   constructor(private customerService: CustomersManagerService,
               private route: ActivatedRoute,

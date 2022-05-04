@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Customer} from "../model/customer.model";
+import {Customer} from "../shared/customer.model";
 import {CustomersManagerService} from "./customers-manager.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs";
@@ -11,6 +11,7 @@ import {Subscription} from "rxjs";
 })
 export class CustomersComponent implements OnInit {
   customers: Customer[] | undefined
+  viewMode : number =0;
   // @ts-ignore
   subscription: Subscription;
   constructor(private customerService: CustomersManagerService,
