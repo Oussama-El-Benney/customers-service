@@ -32,6 +32,5 @@ export class CustomersComponent implements OnInit {
   onAddNewCustomer() {
     this.router.navigate(['new'], {relativeTo: this.route})
     console.log('sh')
-
   }
 }

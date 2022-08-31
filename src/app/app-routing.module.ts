@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {Router, RouterModule, Routes} from "@angular/router";
 import {CustomersComponent} from "./customers/customers.component";
 import {CustomerComponent} from "./customers/customer/customer.component";
@@ -11,16 +11,17 @@ import {CustomerOrdersComponent} from "./customers/customer-orders/customer-orde
 
 const routes: Routes = [
 
-  { path: 'customers', component: CustomersComponent, children:[
-      { path: 'new', component: CustomerEditComponent },
-      { path: 'edit', component: CustomerEditComponent },]},
-  { path: 'customers/orders', component: CustomerOrdersComponent },
-  { path: 'id', component: CustomerComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'orders', component: OrdersComponent },
-  { path: 'auth', component: AuthComponent }
+  {
+    path: 'customers', component: CustomersComponent, children: [
+      {path: 'new', component: CustomerEditComponent},
+      {path: 'edit', component: CustomerEditComponent},]
+  },
+  {path: 'customers/orders', component: CustomerOrdersComponent},
+  {path: 'id', component: CustomerComponent},
+  {path: 'about', component: AboutComponent},
+  {path: 'orders', component: OrdersComponent},
+  {path: 'auth', component: AuthComponent}
 ]
-
 
 
 @NgModule({
@@ -29,6 +30,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forRoot(routes)
   ],
-  exports:[RouterModule]
+  exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
